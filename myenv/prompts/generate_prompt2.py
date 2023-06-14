@@ -13,16 +13,13 @@ setup_openai_api()
 def generate_story():
     prompt = 'Write a basic test plan just launching https://www.opencampus.xyz/ and making sure all buttons are ' \
              'clickable  using python 3 and selenium...'
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt}
-        ],
+    response = openai.Completion.create(
+        engine='gpt-3.5-turbo',
+        prompt=prompt,
         max_tokens=max_tokens,
         temperature=temperature
     )
-    story = response.choices[0].message.content.strip()
+    story = response.choices[0].text.strip()
     return story
 
 
@@ -41,3 +38,4 @@ if __name__ == '__main__':
         file.write(story)
 
     print(f"Saved the generated story as {file_path}")
+

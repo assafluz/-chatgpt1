@@ -2,7 +2,7 @@ import openai
 
 
 def setup_openai_api():
-    openai.api_key = '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'
+    openai.api_key = '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'
 
 
 max_tokens = 400
