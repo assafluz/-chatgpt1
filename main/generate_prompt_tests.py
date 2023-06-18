@@ -11,7 +11,7 @@ setup_openai_api()
 
 
 def generate_story():
-    prompt = 'Write a basic test plan just launching https://www.opencampus.xyz/ and making sure all buttons are ' \
+    prompt = 'Write a basic test plan on https://www.opencampus.xyz/ and making sure all buttons are ' \
              'clickable  using python 3 and selenium...'
     response = openai.Completion.create(
         engine='gpt-3.5-turbo',
