@@ -9,7 +9,7 @@ warnings.simplefilter('ignore', InsecureRequestWarning)
 # Set up the OpenAI API
 setup_openai_api()
 
-# Counter for response filenames
+# Counter for response filenames dk
 response_counter = 1
 
 
