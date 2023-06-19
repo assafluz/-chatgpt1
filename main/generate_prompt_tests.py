@@ -14,8 +14,7 @@ response_counter = 1
 
 
 def generate_story():
-    prompt = 'write a python test case that goes to https://www.opencampus.xyz/ and verify all elements are ' \
-             'clickable, make sure to find and to add the right elements name...'
+    prompt = 'write a python test plan that goes to https://www.opencampus.xyz/ and verify it ...'
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,

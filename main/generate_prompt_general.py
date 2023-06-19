@@ -14,7 +14,7 @@ response_counter = 1
 
 
 def generate_story():
-    prompt = 'write a python test cases entering https://www.opencampus.xyz/ and connect to  metamask wallet ...'
+    prompt = 'do you think there going to be WW3?'
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
@@ -25,6 +25,22 @@ def generate_story():
     )
     story = response.choices[0].text.strip()
     return story
+
+
+def get_last_response_prompt():
+    directory = "responses"
+    prompt_file = os.path.basename(__file__)
+    prompt_filename = os.path.splitext(prompt_file)[0]
+    last_response_file = f"{prompt_filename}_response_{response_counter - 1}.txt"
+    last_response_path = os.path.join(directory, last_response_file)
+    if os.path.exists(last_response_path):
+        with open(last_response_path, "r") as file:
+            last_response = file.read()
+        last_response_lines = last_response.strip().split('\n')
+        if len(last_response_lines) > 1:
+            last_prompt = last_response_lines[1].strip()
+            return last_prompt
+    return None
 
 
 if __name__ == '__main__':
@@ -41,10 +57,18 @@ if __name__ == '__main__':
     prompt_filename = os.path.splitext(prompt_file)[0]
 
     # Generate a unique filename using the prompt name and the response counter
-    filename = f"{prompt_filename}_response_{response_counter}.py"
+    filename = f"{prompt_filename}_response_{response_counter}.txt"
 
-    # Increment the response counter
-    response_counter += 1
+    # Check if the prompt text has changed
+    last_prompt = get_last_response_prompt()
+
+    if last_prompt is not None and last_prompt == prompt:
+        # Update the last response file
+        filename = f"{prompt_filename}_response_{response_counter - 1}.txt"
+    else:
+        # Increment the response counter
+        response_counter += 1
+        filename = f"{prompt_filename}_response_{response_counter}.txt"
 
     # Save the story in the responses directory
     file_path = os.path.join(directory, filename)
