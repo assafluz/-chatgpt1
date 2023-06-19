@@ -9,12 +9,12 @@ warnings.simplefilter('ignore', InsecureRequestWarning)
 # Set up the OpenAI API
 setup_openai_api()
 
-# Counter for response filenames dk
+# Counter for response filenames DK1
 response_counter = 1
 
 
 def generate_story():
-    prompt = 'do you think there going to be WW3?'
+    prompt = 'do you think we will be able to leave forever?'
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
