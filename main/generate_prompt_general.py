@@ -9,9 +9,12 @@ warnings.simplefilter('ignore', InsecureRequestWarning)
 # Set up the OpenAI API
 setup_openai_api()
 
+# Counter for response filenames
+response_counter = 1
+
 
 def generate_story():
-    prompt = 'Write a story on 2 friends...'
+    prompt = 'write a python test cases entering https://www.opencampus.xyz/ and connect to  metamask wallet ...'
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
@@ -26,8 +29,8 @@ def generate_story():
 
 if __name__ == '__main__':
     story = generate_story()
-    print("Generated Story:")
-    print(story)
+    # print("Generated Story:")
+    # print(story)
 
     # Create the directory if it doesn't exist
     directory = "responses"
@@ -37,8 +40,11 @@ if __name__ == '__main__':
     prompt_file = os.path.basename(__file__)
     prompt_filename = os.path.splitext(prompt_file)[0]
 
-    # Generate a unique filename using the prompt name and a UUID
-    filename = f"{prompt_filename}_response_{os.urandom(16).hex()}.txt"
+    # Generate a unique filename using the prompt name and the response counter
+    filename = f"{prompt_filename}_response_{response_counter}.py"
+
+    # Increment the response counter
+    response_counter += 1
 
     # Save the story in the responses directory
     file_path = os.path.join(directory, filename)
