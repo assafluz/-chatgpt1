@@ -1,1 +1,3 @@
 /main/config.py
+*.log
+*.txt
